@@ -2,10 +2,6 @@
 //Used only for char range from 0x20 (space to ~) 0x72
 #define BIT_VECTOR_LEN   (0x7F- 0x20)
 
-int get_hash_code (char in_char) 
-{
-    return (in_char - 0x20);
-}
 
 bool is_unique (char *in_string) 
 /*------------------------------------------------------------------------------
