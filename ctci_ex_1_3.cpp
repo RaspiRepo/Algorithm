@@ -30,7 +30,6 @@ int urlify (char *in_str,
         //this will remove traling space as well
         while(--str_len > 0 && *end_ptr == 0x20) {
             --end_ptr;
-            continue;
         }
         
         //loop thru all chars to copy, also make sure
