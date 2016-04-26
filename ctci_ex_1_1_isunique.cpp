@@ -40,8 +40,8 @@ bool is_unique (char *in_string)
                 break;
             }
             bitvector[hashcode] = true;
-            ++in_string;
         }
+        ++in_string;
     }
     return unique_char;
 }
