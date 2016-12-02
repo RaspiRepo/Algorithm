@@ -1,5 +1,12 @@
+#include <sstream>
+#include <vector>
+#include <iostream>
+#include <string>
 #include <conio.h>
 #include <stdio.h>
+
+using namespace std;
+
 
 //define tree node 
 typedef struct node {
@@ -8,6 +15,44 @@ typedef struct node {
     node *right;
 } NODE;
 
+/**** Move this to test code so gloabl allocation/declaration can be avoided ****/
+vector <int> node_path;
+vector <string> node_path_str;
+
+
+void root_leaf_print (NODE *root, string &node_str, int level)
+/*------------------------------------------------------------------------------
+    root_leaf_print: Print/create string of all node value from root to leaf.  
+
+    Written by     : RaspiRepo
+    Date           : Dec 01, 2016
+ ------------------------------------------------------------------------------*/
+{    
+    if (root == NULL) {
+       return;
+    }  
+    
+    node_path.push_back(root->value);
+    root_leaf_print(root->left, node_str, level -1);
+    root_leaf_print(root->right, node_str, level -1);
+    if (level == 1) {
+        string rt_lf_str = "";
+        stringstream nodelist;
+        vector<int>::iterator it = node_path.begin();
+        int sz = node_path.size();
+        while (--sz > 0) {
+            nodelist << *it << "->";
+            ++it;
+        }
+        nodelist << *it;
+        node_path_str.push_back(nodelist.str());
+    }
+
+    //remove last leaf node (eigher left or right leaf)
+    node_path.pop_back();
+
+    return;
+}
 
 int tree_height (NODE *root) 
 /*------------------------------------------------------------------------------
@@ -64,6 +109,7 @@ void print_level_order (NODE *root)
         printf("\n");
     }
 }
+
 
 NODE *rotate_right (NODE *x)
 /*------------------------------------------------------------------------------
